@@ -1,0 +1,17 @@
+# WARNING: this file is not suitable for production, please use with caution
+version: '3'
+
+services:
+  web:
+    image: geoeditor
+    build: .
+    command: flask run --host 0.0.0.0 --port=8080
+    env_file:
+      - ./.flaskenv
+    environment:
+      - DATABASE_URI=sqlite:////db/geoeditor.db
+    volumes:
+      - ./geoeditor:/code/geoeditor
+      - ./db/:/db/
+    ports:
+      - "8080:8080"
